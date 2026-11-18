@@ -8,8 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Hero Index">
 <meta name="application-name" content="Hero Index">
-<meta name="theme-color" content="#ffd400" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#161a2e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffd400">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -30,10 +29,6 @@
   --mono:"Space Mono",ui-monospace,Menlo,monospace;
   color-scheme:light;
 }
-:root[data-mode="dark"],:root:not([data-mode])[data-theme="dark"]{
-  --paper:#161a2e; --ink:#fff4d6; --tone:#2a3152; --muted:#b8b3c9; --line:#fff4d6; --sky:#1f2747; --dot:rgba(255,212,0,.16); color-scheme:dark}
-@media (prefers-color-scheme:dark){:root:not([data-mode]):not([data-theme="light"]){
-  --paper:#161a2e; --ink:#fff4d6; --tone:#2a3152; --muted:#b8b3c9; --line:#fff4d6; --sky:#1f2747; --dot:rgba(255,212,0,.16); color-scheme:dark}}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--body)}
@@ -427,7 +422,6 @@ label.btn{display:inline-block}
 body{background-color:var(--paper);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.5px);background-size:9px 9px}
 .hero{background-color:var(--sky);background-image:radial-gradient(var(--dot) 1.6px,transparent 1.9px);background-size:8px 8px;box-shadow:6px 6px 0 var(--ink)}
 .hero::before{inset:-60%;background:repeating-conic-gradient(from 0deg at 80% 30%,rgba(255,255,255,.55) 0deg 5deg,transparent 5deg 14deg);opacity:.55}
-:root[data-mode="dark"] .hero::before{opacity:.12}
 .hero::after{content:"POW!";position:absolute;right:18px;bottom:16px;font-family:var(--display);font-size:clamp(1.4rem,4vw,2.4rem);color:#fff;letter-spacing:.04em;
   background:var(--s);padding:.55em .8em;transform:rotate(8deg);-webkit-text-stroke:1.5px #141414;text-shadow:3px 3px 0 #141414;pointer-events:none;
   clip-path:polygon(50% 0%,61% 18%,82% 6%,79% 30%,100% 35%,84% 52%,98% 72%,74% 72%,72% 96%,54% 80%,38% 100%,32% 76%,6% 86%,16% 62%,0% 44%,20% 33%,10% 10%,34% 19%)}
@@ -436,10 +430,8 @@ h1{font-family:var(--display);letter-spacing:.03em;text-transform:uppercase;tran
   color:#fff;-webkit-text-stroke:2px #141414;text-shadow:4px 4px 0 #141414;paint-order:stroke fill}
 h1 em{background:var(--s);color:#fff;border:3px solid #141414;box-shadow:4px 4px 0 #141414;padding:.06em .22em .02em}
 .hero p.lead{color:#141414;font-weight:500}
-:root[data-mode="dark"] .hero p.lead{color:var(--ink)}
 .eyebrow{display:inline-block;background:#141414;color:#fff;padding:3px 8px}
 .credit{color:#141414}
-:root[data-mode="dark"] .credit{color:var(--ink)}
 .tabs{box-shadow:4px 4px 0 var(--ink);background:var(--paper)}
 .tabs button{font-family:var(--display);font-weight:400;font-size:1.2rem;letter-spacing:.05em;text-transform:uppercase}
 .tabs button[aria-selected="true"]{background:var(--s);color:#fff;text-shadow:2px 2px 0 #141414}
@@ -461,6 +453,7 @@ ul.l.pw li::before{background:var(--a)}
 .welcome,.cotd{box-shadow:5px 5px 0 var(--ink)}
 .cotd{background-color:var(--paper)}
 ::selection{background:var(--s-plus);color:#141414}
+#modeBtn{display:none!important}
 @media (max-width:700px){.tabs button{font-size:.98rem;letter-spacing:.02em;padding:10px 8px}}
 </style>
 
@@ -899,7 +892,7 @@ const X={
 "Static":["h", [], []],
 "Kilowog":["h", [], ["Sinestro"]],
 };
-const APP_VERSION="2.0";
+const APP_VERSION="2.1";
 const BD={};
 const AGE={
 "The One-Above-All":["Eeuwig, hij was er vóór alles","Eternal, he existed before everything"],
