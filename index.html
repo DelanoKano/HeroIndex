@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Hero Index">
 <meta name="application-name" content="Hero Index">
-<meta name="theme-color" content="#ffd400">
+<meta name="theme-color" content="#161a2e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -453,8 +453,20 @@ ul.l.pw li::before{background:var(--a)}
 .welcome,.cotd{box-shadow:5px 5px 0 var(--ink)}
 .cotd{background-color:var(--paper)}
 ::selection{background:var(--s-plus);color:#141414}
-#modeBtn{display:none!important}
 @media (max-width:700px){.tabs button{font-size:.98rem;letter-spacing:.02em;padding:10px 8px}}
+
+/* Comic book at night: navy pages, cream ink, the yellow cover stays */
+:root[data-mode="dark"]{--paper:#161a2e; --ink:#fff4d6; --tone:#252c4a; --muted:#b9b4c9; --line:#fff4d6; --dot:rgba(255,212,0,.13); color-scheme:dark}
+:root[data-mode="dark"] .hero{background-image:radial-gradient(rgba(229,29,42,.22) 1.6px,transparent 1.9px);border-color:#141414;box-shadow:6px 6px 0 #000}
+:root[data-mode="dark"] .ch{background-image:radial-gradient(rgba(255,244,214,.08) 1px,transparent 1.3px)}
+:root[data-mode="dark"] .card,:root[data-mode="dark"] .cotd,:root[data-mode="dark"] .welcome,:root[data-mode="dark"] .tabs{box-shadow:5px 5px 0 #000}
+:root[data-mode="dark"] .btn{box-shadow:3px 3px 0 #000}
+:root[data-mode="dark"] .power b{-webkit-text-stroke:0}
+:root[data-mode="dark"] .eyebrow{background:#141414}
+.hero .ver,.hero .ver .helpbtn{color:#3d362c}
+.hero .langs button{color:#141414;background:#fffaf0;border-color:#141414}
+.hero .langs button[aria-pressed="true"]{background:#141414;color:#fffaf0}
+.hero .credit b{background:#141414;color:#fffaf0}
 </style>
 
 <div class="wrap">
@@ -892,7 +904,7 @@ const X={
 "Static":["h", [], []],
 "Kilowog":["h", [], ["Sinestro"]],
 };
-const APP_VERSION="2.1";
+const APP_VERSION="2.2";
 const BD={};
 const AGE={
 "The One-Above-All":["Eeuwig, hij was er vóór alles","Eternal, he existed before everything"],
@@ -1579,10 +1591,10 @@ function show(v){
 }
 
 const root=document.documentElement;
-const isDark=()=>getComputedStyle(root).getPropertyValue("--paper").trim().toLowerCase()==="#121216";
+const isDark=()=>root.getAttribute("data-mode")!=="light";
 function syncMode(){const d=isDark(),b=$("#modeBtn");b.textContent=d?"☀":"☾";
   b.setAttribute("aria-label",lang==="en"?(d?"Light mode":"Dark mode"):(d?"Lichte modus":"Donkere modus"))}
-try{const m=localStorage.getItem("hk-mode");if(m==="dark"||m==="light")root.setAttribute("data-mode",m)}catch(e){}
+root.setAttribute("data-mode","dark");try{const m=localStorage.getItem("hk-mode");if(m==="light")root.setAttribute("data-mode","light")}catch(e){}
 try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",syncMode)}catch(e){}
 new MutationObserver(syncMode).observe(root,{attributes:true,attributeFilter:["data-theme","data-mode"]});
 document.addEventListener("click",e=>{
