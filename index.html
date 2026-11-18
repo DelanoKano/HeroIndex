@@ -873,7 +873,7 @@ const X={
 "Static":["h", [], []],
 "Kilowog":["h", [], ["Sinestro"]],
 };
-const APP_VERSION="1.1";
+const APP_VERSION="1.2";
 const BD={};
 const AGE={
 "The One-Above-All":["Eeuwig, hij was er vóór alles","Eternal, he existed before everything"],
@@ -1219,9 +1219,11 @@ const LORE={
 "Kilowog":{"how":["Hij komt van de planeet Bolovax Vik, en zijn sterke wil maakte hem een Green Lantern.","He comes from the planet Bolovax Vik, and his strong will made him a Green Lantern."],"moment":["Hij trainde vele generaties Green Lanterns, waaronder Hal Jordan.","He trained generations of Green Lanterns, including Hal Jordan."],"fact":["Hij noemt alle rekruten 'poozers'.","He calls all recruits 'poozers'."],"spoil":["Zijn hele planeet werd vernietigd, en hij is de laatste van zijn volk.","His entire planet was destroyed, and he's the last of his people."]}
 };
 const bioOf=c=>c.bio||(BIO[c.n]?BIO[c.n][lang==="en"?1:0]:"");
+// On a computer-sized screen the "more info" block starts open
+const isWide=()=>{try{return matchMedia("(min-width:900px)").matches}catch(e){return false}};
 function moreInfo(c){const x=c.x||X[c.n];if(!x)return"";const t=tr();
   const bio=bioOf(c);
-  return `<details class="more"><summary>${t.more}</summary><div class="mi">
+  return `<details class="more"${isWide()?" open":""}><summary>${t.more}</summary><div class="mi">
   ${bio?`<div><h4>${t.story}</h4><p class="bio">${esc(bio)}</p></div>`:""}
   ${(()=>{const L=LORE[c.n];if(!L)return"";const i=lang==="en"?1:0,nm=esc(c.n.split(" (")[0]);
     return (L.how?`<div><h4>${t.loreHow(nm)}</h4><p class="bio">${esc(L.how[i])}</p></div>`:"")+(L.moment?`<div><h4>${t.loreMoment}</h4><p class="bio">${esc(L.moment[i])}</p></div>`:"")+(L.fact?`<div><h4>${t.loreFact}</h4><p class="bio">${esc(L.fact[i])}</p></div>`:"")+(L.spoil?`<details class="spoil"><summary>${t.loreSpoil}</summary><p class="bio">${esc(L.spoil[i])}</p></details>`:"")})()}
