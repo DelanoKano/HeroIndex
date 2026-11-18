@@ -110,7 +110,7 @@ details.more{border-top:2px dashed var(--ink);padding-top:10px;margin-top:auto}
 details.more summary{cursor:pointer;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
 details.more summary::-webkit-details-marker{display:none}
 details.more summary::after{content:"+";font-family:var(--display);font-size:1.1rem;line-height:1}
-details.more[open] summary::after{content:"−"}
+details.more[open]>summary::after,details.spoil[open]>summary::after{content:"−"}
 details.more summary:focus-visible{outline:1px solid var(--s);outline-offset:2px}
 .mi{display:flex;flex-direction:column;gap:10px;padding-top:10px}
 .role{display:inline-block;border:1px solid var(--line);padding:1px 8px;font-weight:700;font-size:.82rem}
@@ -873,7 +873,7 @@ const X={
 "Static":["h", [], []],
 "Kilowog":["h", [], ["Sinestro"]],
 };
-const APP_VERSION="1.2";
+const APP_VERSION="1.3";
 const BD={};
 const AGE={
 "The One-Above-All":["Eeuwig, hij was er vóór alles","Eternal, he existed before everything"],
