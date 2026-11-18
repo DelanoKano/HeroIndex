@@ -467,6 +467,14 @@ ul.l.pw li::before{background:var(--a)}
 .hero .langs button{color:#141414;background:#fffaf0;border-color:#141414}
 .hero .langs button[aria-pressed="true"]{background:#141414;color:#fffaf0}
 .hero .credit b{background:#141414;color:#fffaf0}
+
+/* "users online" line in the header. DEMO: the number is random until a real counter (server) exists */
+.online{margin:10px 0 0;display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;background:#111114;color:#fff;padding:3px 10px 3px 8px}
+.online b{font-family:var(--display);font-weight:400;font-size:1rem;letter-spacing:.02em}
+.pulse{width:9px;height:9px;border-radius:50%;background:#2fd36b;box-shadow:0 0 0 0 rgba(47,211,107,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(47,211,107,0)}100%{box-shadow:0 0 0 0 rgba(47,211,107,0)}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+.hero .ver{margin-top:6px}
 </style>
 
 <div class="wrap">
@@ -480,6 +488,7 @@ ul.l.pw li::before{background:var(--a)}
     <h1 data-i18n-html="title">Hero <em>Krachtindex</em></h1>
     <p class="lead" data-i18n="lead">De sterkste helden en schurken van Marvel en DC op een rij: wat ze kunnen, waar ze kwetsbaar zijn en wie er wint als ze elkaar tegenkomen.</p>
     <p class="credit">Made by <b>Della</b></p>
+    <p class="online" aria-live="off"><span class="pulse" aria-hidden="true"></span><b id="onl"></b> <span data-i18n="online">gebruikers online</span></p>
     <p class="ver"><span id="ver"></span> · <button type="button" class="helpbtn" id="helpBtn" data-i18n="help">Hoe werkt het?</button></p>
   </header>
 
@@ -559,7 +568,7 @@ const L={
   winP:(w,k,m,l)=>`${w} wint op ${k} van de 5 eigenschappen. Maar let op het minpunt van ${w}: ${m}. Daar kan ${l} zijn kans pakken.`,
   scoreLine:(a,b)=>`Krachtscore ${a} tegen ${b}.`,
   fight:"Vechten!",rematch:"Rematch!",oddsL:"Winkans",tallyL:(n,a,x,b,y)=>`Stand na ${n} ${n===1?"gevecht":"gevechten"}: ${a} ${x} – ${y} ${b}`,draws:n=>n?` (${n}× gelijk)`:"",upsetH:n=>`Stunt! ${n} wint tegen de verwachting in`,kickU:["De grootste stunt van het jaar","Niemand zag dit aankomen","Tegen alle verwachtingen in"],pending:"Tik op Vechten! om te zien wie wint.",winnerW:"WINNAAR",drawW:"GELIJK",booms:["BAM!","POW!","DOEF!","KRAK!","WHAM!"],
-  tabPlay:"Spelen",tabMake:"Maak je eigen",vBig:"Groot",vSmall:"Compact",qNone:"Geen character gevonden",collapse:"Klein maken",help:"Hoe werkt het?",wTitle:"Welkom bij de Hero Krachtindex!",wClose:"Begrepen",
+  tabPlay:"Spelen",tabMake:"Maak je eigen",vBig:"Groot",vSmall:"Compact",qNone:"Geen character gevonden",collapse:"Klein maken",help:"Hoe werkt het?",online:"gebruikers online",wTitle:"Welkom bij de Hero Krachtindex!",wClose:"Begrepen",
   wItems:[["cards","Characters","Hier ben je nu. Tik op een naam voor het verhaal, de krachten en spoilers."],["vs","Wie wint?","Laat twee characters vechten en lees het gevechtsverhaal."],["play","Spelen","Verzamel kaarten met munten en maak fusies."],["make","Maak je eigen","Zet jezelf of je vrienden in de app, met foto."]],mkTitle:"Maak je eigen character",mkIntro:"Je eigen characters worden op dit apparaat bewaard en doen overal mee: in de ranking, de tierlijst en bij Wie wint?",
   fName:"Naam",fAnime:"Uit welk team of universum?",defAnime:"Mijn characters",fK:"Totale kracht (bepaalt de ranking)",fStats:"Scores",fRole:"Rol",
   fP:"Krachten (één per regel)",fM:"Minpunten (één per regel)",fForms:"Vormen en transformaties (scheid met komma's)",fFights:"Bekende gevechten (scheid met komma's)",fBio:"Verhaal (optioneel)",fPhoto:"Foto (optioneel)",pickPhoto:"Foto kiezen",changePhoto:"Andere foto",rmPhoto:"Foto weghalen",photoHelp:"De foto wordt klein gemaakt en op dit apparaat bewaard. Deel je het character, dan gaat de foto mee.",photoLocal:"Deze foto staat alleen op dit apparaat.",photoErr:"Deze foto kon niet worden geladen. Probeer een andere.",photoFull:"Je telefoon heeft geen ruimte meer voor deze foto. Haal eerst een andere foto weg.",photoH:"Foto",phBio:"Wie is dit? Waar komt hij vandaan en wat wil hij bereiken?",
@@ -582,7 +591,7 @@ const L={
   winP:(w,k,m,l)=>`${w} wins on ${k} of the 5 stats. But watch out for ${w}'s weakness: ${m}. That's where ${l} could take their chance.`,
   scoreLine:(a,b)=>`Power score ${a} vs ${b}.`,
   fight:"Fight!",rematch:"Rematch!",oddsL:"Win chance",tallyL:(n,a,x,b,y)=>`Score after ${n} ${n===1?"fight":"fights"}: ${a} ${x} – ${y} ${b}`,draws:n=>n?` (${n} draws)`:"",upsetH:n=>`Upset! ${n} wins against the odds`,kickU:["The upset of the year","Nobody saw this coming","Against all odds"],pending:"Tap Fight! to see who wins.",winnerW:"WINNER",drawW:"DRAW",booms:["BAM!","POW!","BOOM!","CRACK!","WHAM!"],
-  tabPlay:"Play",tabMake:"Create",vBig:"Large",vSmall:"Compact",qNone:"No character found",collapse:"Collapse",help:"How does it work?",wTitle:"Welcome to the Hero Power Index!",wClose:"Got it",
+  tabPlay:"Play",tabMake:"Create",vBig:"Large",vSmall:"Compact",qNone:"No character found",collapse:"Collapse",help:"How does it work?",online:"users online",wTitle:"Welcome to the Hero Power Index!",wClose:"Got it",
   wItems:[["cards","Characters","You're here now. Tap a name for the story, powers and spoilers."],["vs","Who wins?","Make two characters fight and read the battle story."],["play","Play","Collect cards with coins and create fusions."],["make","Create","Add yourself or your friends to the app, with a photo."]],mkTitle:"Create your own character",mkIntro:"Your own characters are saved on this device and join everything: the ranking, the tier list and Who wins?",
   fName:"Name",fAnime:"From which team or universe?",defAnime:"My characters",fK:"Overall power (sets the ranking)",fStats:"Stats",fRole:"Role",
   fP:"Powers (one per line)",fM:"Weaknesses (one per line)",fForms:"Forms and transformations (separate with commas)",fFights:"Famous fights (separate with commas)",fBio:"Story (optional)",fPhoto:"Photo (optional)",pickPhoto:"Choose photo",changePhoto:"Change photo",rmPhoto:"Remove photo",photoHelp:"The photo is shrunk and saved on this device. If you share the character, the photo goes along.",photoLocal:"This photo is only saved on this device.",photoErr:"This photo couldn't be loaded. Try another one.",photoFull:"Your phone has no room left for this photo. Remove another photo first.",photoH:"Photo",phBio:"Who is this? Where do they come from and what do they want?",
@@ -904,7 +913,7 @@ const X={
 "Static":["h", [], []],
 "Kilowog":["h", [], ["Sinestro"]],
 };
-const APP_VERSION="2.2";
+const APP_VERSION="2.3";
 const BD={};
 const AGE={
 "The One-Above-All":["Eeuwig, hij was er vóór alles","Eternal, he existed before everything"],
@@ -1922,4 +1931,7 @@ document.addEventListener("input",e=>{if(e.target.id==="fuName"&&fuse){fuse.n=e.
 setInterval(()=>{const w=$(".wl-free");if(w&&!$("#v-play").hidden){const fp=freePacks(),u=untilMidnight();w.textContent=fp?pt().free(fp):pt().next(u.h,u.m)}},60000);
 
 renderTiers();fillVs();applyLang();syncMode();
+
+// DEMO "users online": a random number above 500, new on every app start. Replace with a real counter once the app is public.
+(function(){const n=500+Math.floor(Math.random()*1000);const el=document.getElementById("onl");if(el)el.textContent=n.toLocaleString("nl-NL")})();
 </script>
